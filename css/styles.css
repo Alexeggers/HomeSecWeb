@@ -1,6 +1,7 @@
 body {
     margin: 0;
     background-color: #222629;
+    font-family: "Microsoft YaHei", sans-serif;
 }
 
 @media (max-width: 62em) {
@@ -18,7 +19,7 @@ body {
 }
 
 p, a {
-    color: #86C232;
+    color: rgb(123,207,245);
 }
 
 p {
