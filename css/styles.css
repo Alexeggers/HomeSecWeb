@@ -84,11 +84,11 @@ a {
 }
 
 .locked {
-    background-image: url(../images/unlock2.jpg);
+    background-image: url(../images/unlock.jpg);
 }
 
 .unlocked {
-    background-image: url(../images/lock2.png);
+    background-image: url(../images/lock.png);
 }
 
 .hidden-iframe {
