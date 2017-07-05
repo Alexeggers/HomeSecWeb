@@ -1,7 +1,7 @@
 /*global $, jQuery, alert*/
 $(document).ready(function () {
     "use strict";
-    var locked = true,
+    var locked = false,
         currentStatusText = "Current Status: ",
         lockedText = "<span style='color: red'>Locked</span>",
         unlockedText = "<span style='color: limegreen'>Open</span>";

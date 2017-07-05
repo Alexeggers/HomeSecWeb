@@ -2,16 +2,13 @@ body {
     margin: 0;
     background-color: #222629;
     font-family: "Microsoft YaHei", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-@media (max-width: 62em) {
-    .nav-bar, .content {
-        font-size: 40px;
-    }
-    
-    .content {
-        text-align: center;
-    }
+.nav-bar, .content {
+    font-size: 72px;
 }
 
 .header {
@@ -27,19 +24,27 @@ p {
 }
 
 .title a {
-    font-size: 36px;
+    font-size: 96px;
     text-align: center
 }
 
 .nav-bar {
+    margin-top: 40px;
     text-align: center;
-    font-size: 20px;
 }
 
-
-
 .nav-bar a:first-child {
-    padding-right: 20px;
+    margin-right: 20px;
+}
+
+.nav-bar a {
+    background-color: white;
+    color: black;
+    display: inline-block;
+    text-align: center;
+    font-size: 48px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 a {
@@ -49,6 +54,7 @@ a {
 
 .content {
     position: relative;
+    min-height: 600px;
 }
 
 .content p {
@@ -68,21 +74,21 @@ a {
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    background-color: #6b6e70;
-    width: 100px;
-    height: 100px;
-    border-radius: 5px;
+    background-color: #fff;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
 }
 
 .locked {
-    background-image: url(../images/unlock.jpg);
+    background-image: url(../images/unlock2.jpg);
 }
 
 .unlocked {
-    background-image: url(../images/lock.png);
+    background-image: url(../images/lock2.png);
 }
 
 .hidden-iframe {
