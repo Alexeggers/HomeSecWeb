@@ -11,7 +11,7 @@ $(document).ready(function () {
             $('.door-status p').html(currentStatusText + lockedText);
             $('.door-button').removeClass('unlocked');
             $('.door-button').addClass('locked');
-            window.open("/lock", "hidden-iframe");
+            window.open("/close", "hidden-iframe");
         } else {
             $('.door-status p').html(currentStatusText + unlockedText);
             $('.door-button').removeClass('locked');
