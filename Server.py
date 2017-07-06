@@ -76,7 +76,7 @@ def get_private_key(environ, start_response):
 def generateSSHKey(keyName):
     try:
         print "[INFO] Starting to generate key Pair"
-        os.system('ssh-keygen -t rsa -b 4096 -f /keyserver/regkey/' + str(keyName) + '.key -q -N ""')
+        os.system('ssh-keygen -t rsa -b 4096 -f /keyserver/regkey/' + str(keyName) + ' -q -N ""')
         os.system('ssh-keygen -y -f /keyserver/regkey/' + str(keyName) + '.key > /keyserver/regkey/' + str(keyName) + '')
         print "[INFO] Key Pair was generated successfully"
     except:
