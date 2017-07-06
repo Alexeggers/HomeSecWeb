@@ -7,7 +7,7 @@ $(document).ready(function () {
         unlockedText = "<span style='color: limegreen'>Open</span>";
     
     function setLocked() {
-        if (locked) {
+        if (!locked) {
             $('.door-status p').html(currentStatusText + lockedText);
             $('.door-button').removeClass('unlocked');
             $('.door-button').addClass('locked');
