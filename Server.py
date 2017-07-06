@@ -56,13 +56,17 @@ def get_jquery(environ, start_response):
     yield resp.encode("utf-8")
 
 def get_private_key(environ, start_response):
-    start_response('200 OK', [ ('Content-type','text/json')])
     #params = environ['params']
     now = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d%H%M%S')
     keyPair = generateSSHKey(now)
     regSSHKey(keyPair[1])
-    with open(keyPair[0]) as privateKey:
-        resp = "{'pvtKey': '" + privateKey + "'}"
+    try:
+        with open(keyPair[0]) as privateKey:
+            resp = "{'pvtKey': '" + privateKey + "'}"
+    except:
+        start_response('500 Error', [ ('Content-type','text/json')])
+        yield "{'Error': 'Key was not generated'}".encode("utf-8")
+    start_response('200 OK', [ ('Content-type','text/json')])
     yield resp.encode("utf-8")
 
 
