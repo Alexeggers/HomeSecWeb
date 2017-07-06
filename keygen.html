@@ -2,21 +2,22 @@
     <head>
         <title>HomeSec</title>
         <link rel="stylesheet" href="css/styles.css">
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="js/jquery-3.2.1.js"></script>
+        <script src="js/index.js"></script>
     </head>
     <body>
         <div class="header">
             <div class="title">
                 <p><a href="index.html">HomeSec</a></p>
-            </div>
-
-            <div class="nav-bar">
-                <a href="keygen.html">Generate Keys</a>
-                <a href="index.html">Control Door</a>
-            </div>
+            </div>    
         </div>
         <div class="content">
-            <p>Welcome to HomeSec.<br>Here, you can generate your key and open your door.</p>
+            <div class="generate-key-button">Generate Key</div>
         </div>
+        <div class="nav-bar">
+            <a href="/keygen">Generate Keys</a>
+            <a href="/">Control Door</a>
+        </div>
+        <iframe class="hidden-iframe" name="hidden-iframe"></iframe>
     </body>
 </html>
