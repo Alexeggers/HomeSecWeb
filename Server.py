@@ -1,3 +1,12 @@
+import socket
+import os
+import sys
+import errno
+import time
+import datetime
+
+
+# Endpoint methods -----------------------------
 def index_page(environ, start_response):
     start_response('200 OK', [ ('Content-type','text/html')])
     params = environ['params']
@@ -46,6 +55,50 @@ def get_jquery(environ, start_response):
         resp = file.read()
     yield resp.encode("utf-8")
 
+def get_private_key(environ, start_response):
+    start_response('200 OK', [ ('Content-type','text/json')])
+    #params = environ['params']
+    now = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d%H%M%S')
+    keyPair = generateSSHKey(now)
+    regSSHKey(keyPair[1])
+    with open(keyPair[0]) as privateKey:
+        resp = "{'pvtKey': '" + privateKey + "'}"
+    yield resp.encode("utf-8")
+
+
+
+# Worker Methods ---------------------------------------------------
+
+def generateSSHKey(keyName):
+    try:
+        print "[INFO] Starting to generate key Pair"
+        os.system('ssh-keygen -t rsa -b 4096 -f /keyserver/regkey/' + str(keyName) + '.key -q -N ""')
+        os.system('ssh-keygen -y -f /keyserver/regkey/' + str(keyName) + '.key > /keyserver/regkey/' + str(keyName) + '')
+        print "[INFO] Key Pair was generated successfully"
+    except:
+        print "[ERROR] Generate key Pair failed"
+    
+    pubKey = "/keyserver/regkey/" + str(keyName) + ".pub"
+    privateKey = '/keyserver/regkey/' + str(keyName) + '.key'
+    
+    keyPair = [pubKey, privateKey ]
+    
+    return keyPair
+
+
+def regSSHKey(pubKey):
+    #Writing PubKey SSH Authorized Keys
+    print "[INFO] Starting to write .SSH/Authorized >"
+    
+    sshAuthPath = "/home/pi/.ssh/authorized_keys"
+    
+    file = open(pubKey, "r")
+    pubKeyRSA = file.read()
+    
+    file = open(sshAuthPath, "a")
+    file.write(pubKeyRSA)
+    file.close()
+
 if __name__ == '__main__':
     from resty import PathDispatcher
     from wsgiref.simple_server import make_server
@@ -58,6 +111,7 @@ if __name__ == '__main__':
     dispatcher.register('GET', '/images/lock.png', lock_image)
     dispatcher.register('GET', '/js/index.js', get_js)
     dispatcher.register('GET', '/js/jquery-3.2.1.js', get_jquery)
+    dispatcher.register('GET', '/privateKey', get_private_key)
 
     # Launch a basic server
     httpd = make_server('', 8080, dispatcher)
