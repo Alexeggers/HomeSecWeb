@@ -59,31 +59,34 @@ def get_private_key(environ, start_response):
     #params = environ['params']
     now = datetime.datetime.fromtimestamp(time.time()).strftime('%Y%m%d%H%M%S')
     keyPair = generateSSHKey(now)
-    regSSHKey(keyPair[1])
-    try:
-        with open(keyPair[0]) as privateKey:
-            resp = "{'pvtKey': '" + privateKey + "'}"
-    except:
-        start_response('500 Error', [ ('Content-type','text/json')])
-        yield "{'Error': 'Key was not generated'}".encode("utf-8")
-    start_response('200 OK', [ ('Content-type','text/json')])
-    yield resp.encode("utf-8")
+    regSSHKey(keyPair[0])
+    print keyPair[1]
+    with open(keyPair[1]) as privateKeyFile:
+        resp = privateKeyFile.read()
+        #resp = "Test"
+    start_response('200 OK', [ ('Content-type','text/plain')])
+    yield resp
 
 
 
 # Worker Methods ---------------------------------------------------
 
 def generateSSHKey(keyName):
+    keyName = str(keyName)
     try:
         print "[INFO] Starting to generate key Pair"
-        os.system('ssh-keygen -t rsa -b 4096 -f /keyserver/regkey/' + str(keyName) + ' -q -N ""')
-        os.system('ssh-keygen -y -f /keyserver/regkey/' + str(keyName) + '.key > /keyserver/regkey/' + str(keyName) + '')
+        os.system('ssh-keygen -t rsa -b 4096 -f /keyserver/regkey/' + keyName + ' -q -N ""')
+        os.system('ssh-keygen -y -f /keyserver/regkey/' + keyName + ' > /keyserver/regkey/' + str(keyName) + '.pub')
+        
+        os.system('chmod 600 /keyserver/regkey/' + keyName)
+        os.system('chmod 644 /keyserver/regkey/' + keyName + '.pub')
+        
         print "[INFO] Key Pair was generated successfully"
     except:
         print "[ERROR] Generate key Pair failed"
     
-    pubKey = "/keyserver/regkey/" + str(keyName) + ".pub"
-    privateKey = '/keyserver/regkey/' + str(keyName) + '.key'
+    pubKey = "/keyserver/regkey/" + keyName + ".pub"
+    privateKey = "/keyserver/regkey/" + keyName
     
     keyPair = [pubKey, privateKey ]
     
@@ -102,6 +105,8 @@ def regSSHKey(pubKey):
     file = open(sshAuthPath, "a")
     file.write(pubKeyRSA)
     file.close()
+
+    print "Successfully wrote key"
 
 if __name__ == '__main__':
     from resty import PathDispatcher
