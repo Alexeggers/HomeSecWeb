@@ -24,5 +24,5 @@ $(document).ready(function () {
     $('.door-status p').html(currentStatusText + lockedText);
     $('.door-button').removeClass('unlocked');
     $('.door-button').addClass('locked');
-    $('.door-button').click(setLocked).bind(this, locked);
+    $('.door-button').click(toggleLocked);
 });
