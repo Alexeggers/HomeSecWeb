@@ -1,25 +1,25 @@
 /*global $, jQuery, alert*/
 $(document).ready(function () {
     "use strict";
-    var locked = true,
+    var open = false,
         currentStatusText = "Current Status: ",
         lockedText = "<span style='color: red'>Locked</span>",
         unlockedText = "<span style='color: limegreen'>Open</span>";
     
     function toggleLocked() {
-        if (!locked) {
+        if (open) {
             $('.door-status p').html(currentStatusText + lockedText);
             $('.door-button').removeClass('unlocked');
             $('.door-button').addClass('locked');
-            window.open("/open", "hidden-iframe");
+            window.open("/lock", "hidden-iframe");
         } else {
             $('.door-status p').html(currentStatusText + unlockedText);
             $('.door-button').removeClass('locked');
             $('.door-button').addClass('unlocked');
-            window.open("/close", "hidden-iframe");
+            window.open("/open", "hidden-iframe");
         }
         
-        locked = !locked;
+        open = !open;
     }
     $('.door-status p').html(currentStatusText + lockedText);
     $('.door-button').removeClass('unlocked');
