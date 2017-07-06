@@ -10,7 +10,6 @@ import open_sesame
 # Endpoint methods -----------------------------
 def index_page(environ, start_response):
     start_response('200 OK', [ ('Content-type','text/html')])
-    params = environ['params']
     with open("index.html", "r") as file:
         resp = file.read()
     yield resp.encode('utf-8')
@@ -70,13 +69,19 @@ def get_private_key(environ, start_response):
 
 def close_door(environ, start_response):
     start_response('200 OK', [ ('Content-type','text/plain')])
-    fuck_off.go()
+    fuck_off.run()
     yield "Success"
 
 def open_door(environ, start_response):
     start_response('200 OK', [ ('Content-type','text/plain')])
-    open_sesame.go()
+    open_sesame.run()
     yield "Success"
+
+def get_keygen_page(environ, start_response):
+    start_response('200 OK', [ ('Content-type','text/html')])
+    with open("keygen.html", "r") as file:
+        resp = file.read()
+    yield resp.encode('utf-8')
 
 
 
@@ -124,6 +129,8 @@ if __name__ == '__main__':
     from resty import PathDispatcher
     from wsgiref.simple_server import make_server
 
+    fuck_off.run()
+
     # Create the dispatcher and register functions
     dispatcher = PathDispatcher()
     dispatcher.register('GET', '/', index_page)
@@ -135,6 +142,8 @@ if __name__ == '__main__':
     dispatcher.register('GET', '/privateKey', get_private_key)
     dispatcher.register('GET', '/close', close_door)
     dispatcher.register('GET', '/open', open_door)
+    dispatcher.register('GET', '/keygen', get_keygen_page)
+
 
     # Launch a basic server
     httpd = make_server('', 8080, dispatcher)
