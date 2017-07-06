@@ -67,7 +67,7 @@ def get_private_key(environ, start_response):
     start_response('200 OK', [ ('Content-type','text/plain')])
     with open("keypage.html") as page:
         resp = page.read().format(displayedKey=key)
-    yield resp
+    yield resp.encode("utf-8")
 
 def close_door(environ, start_response):
     start_response('200 OK', [ ('Content-type','text/plain')])
@@ -82,8 +82,7 @@ def open_door(environ, start_response):
 def get_keygen_page(environ, start_response):
     start_response('200 OK', [ ('Content-type','text/html')])
     with open("keygen.html", "r") as file:
-        key = file.read()
-    with open("")
+        resp = file.read()
     yield resp.encode('utf-8')
 
 
