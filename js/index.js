@@ -11,12 +11,12 @@ $(document).ready(function () {
             $('.door-status p').html(currentStatusText + lockedText);
             $('.door-button').removeClass('unlocked');
             $('.door-button').addClass('locked');
-            $(".door-controller").attr("href", "/open")
+            window.open("/open", "hidden-iframe");
         } else {
             $('.door-status p').html(currentStatusText + unlockedText);
             $('.door-button').removeClass('locked');
             $('.door-button').addClass('unlocked');
-            $(".door-controller").attr("href", "/close")
+            window.open("/close", "hidden-iframe");
         }
         
         locked = !locked;

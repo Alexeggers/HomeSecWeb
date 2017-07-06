@@ -1,17 +1,17 @@
-import RPi.GPIO as GPIO
-import time
-schloss = 4
-red = 26
-green = 16
-blue = 13
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-GPIO.setup(red,GPIO.OUT)
-GPIO.setup(green,GPIO.OUT)
-GPIO.setup(blue,GPIO.OUT)
-GPIO.setup(schloss,GPIO.OUT)
-
 def run():
+	import RPi.GPIO as GPIO
+	import time
+	schloss = 4
+	red = 26
+	green = 16
+	blue = 13
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setwarnings(False)
+	GPIO.setup(red,GPIO.OUT)
+	GPIO.setup(green,GPIO.OUT)
+	GPIO.setup(blue,GPIO.OUT)
+	GPIO.setup(schloss,GPIO.OUT)
+
 	try:
 		GPIO.output(red,0)
 		GPIO.output(green,1)

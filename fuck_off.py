@@ -1,20 +1,19 @@
-import RPi.GPIO as GPIO
-import time
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-motor = 4
-red = 26
-green = 16
-blue = 13
-GPIO.setup(4,GPIO.OUT)
-GPIO.setup(red,GPIO.OUT)
-GPIO.setup(green,GPIO.OUT)
-GPIO.setup(blue,GPIO.OUT)
-GPIO.setup(17,GPIO.OUT)
-buzzer_pin = 27
-
 def run():
+	import RPi.GPIO as GPIO
+	import time
+
+	GPIO.setmode(GPIO.BCM)
+	GPIO.setwarnings(False)
+	motor = 4
+	red = 26
+	green = 16
+	blue = 13
+	GPIO.setup(4,GPIO.OUT)
+	GPIO.setup(red,GPIO.OUT)
+	GPIO.setup(green,GPIO.OUT)
+	GPIO.setup(blue,GPIO.OUT)
+	GPIO.setup(17,GPIO.OUT)
+	buzzer_pin = 27
 	try:	
 		GPIO.output(red,1)
 		GPIO.output(green,0)
