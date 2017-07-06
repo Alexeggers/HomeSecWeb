@@ -21,8 +21,14 @@ $(document).ready(function () {
         
         open = !open;
     }
+
+    function generate() {
+        window.open("/privateKey");
+    }
+
     $('.door-status p').html(currentStatusText + lockedText);
     $('.door-button').removeClass('unlocked');
     $('.door-button').addClass('locked');
     $('.door-button').click(toggleLocked);
+    $('.generate-key-button').click(generate);
 });

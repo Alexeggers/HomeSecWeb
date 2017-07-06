@@ -62,9 +62,11 @@ def get_private_key(environ, start_response):
     regSSHKey(keyPair[0])
     print keyPair[1]
     with open(keyPair[1]) as privateKeyFile:
-        resp = privateKeyFile.read()
+        key = privateKeyFile.read()
         #resp = "Test"
     start_response('200 OK', [ ('Content-type','text/plain')])
+    with open("keypage.html") as page:
+        resp = page.read().format(displayedKey=key)
     yield resp
 
 def close_door(environ, start_response):
@@ -80,7 +82,8 @@ def open_door(environ, start_response):
 def get_keygen_page(environ, start_response):
     start_response('200 OK', [ ('Content-type','text/html')])
     with open("keygen.html", "r") as file:
-        resp = file.read()
+        key = file.read()
+    with open("")
     yield resp.encode('utf-8')
 
 
