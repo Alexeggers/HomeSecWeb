@@ -64,7 +64,7 @@ def get_private_key(environ, start_response):
     with open(keyPair[1]) as privateKeyFile:
         key = privateKeyFile.read()
         #resp = "Test"
-    start_response('200 OK', [ ('Content-type','text/plain')])
+    start_response('200 OK', [ ('Content-type','text/html')])
     with open("keypage.html") as page:
         resp = page.read().format(displayedKey=key)
     yield resp.encode("utf-8")
