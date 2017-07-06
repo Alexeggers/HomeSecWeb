@@ -3,6 +3,8 @@ import sys
 import errno
 import time
 import datetime
+import fuck_off
+import open_sesame
 
 
 # Endpoint methods -----------------------------
@@ -66,6 +68,17 @@ def get_private_key(environ, start_response):
     start_response('200 OK', [ ('Content-type','text/plain')])
     yield resp
 
+def close_door(environ, start_response):
+    start_response('200 OK', [ ('Content-type','text/plain')])
+    fuck_off.go()
+    yield "Success"
+
+def open_door(environ, start_response):
+    start_response('200 OK', [ ('Content-type','text/plain')])
+    open_sesame.go()
+    yield "Success"
+
+
 
 
 # Worker Methods ---------------------------------------------------
@@ -120,6 +133,8 @@ if __name__ == '__main__':
     dispatcher.register('GET', '/js/index.js', get_js)
     dispatcher.register('GET', '/js/jquery-3.2.1.js', get_jquery)
     dispatcher.register('GET', '/privateKey', get_private_key)
+    dispatcher.register('GET', '/close', close_door)
+    dispatcher.register('GET', '/open', open_door)
 
     # Launch a basic server
     httpd = make_server('', 8080, dispatcher)

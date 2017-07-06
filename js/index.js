@@ -20,5 +20,5 @@ $(document).ready(function () {
         locked = !locked;
     }
     setLocked();
-    $('.door-button').click(setLocked).bind(this, true);
+    $('.door-button').click(setLocked).bind(this, locked);
 });
