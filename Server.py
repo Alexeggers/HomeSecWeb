@@ -134,6 +134,7 @@ if __name__ == '__main__':
     # Create the dispatcher and register functions
     dispatcher = PathDispatcher()
     dispatcher.register('GET', '/', index_page)
+    dispatcher.register('GET', '/index.html', index_page)
     dispatcher.register('GET', '/css/styles.css', get_styles)
     dispatcher.register('GET', '/images/unlock.jpg', unlock_image)
     dispatcher.register('GET', '/images/lock.png', lock_image)
@@ -143,6 +144,7 @@ if __name__ == '__main__':
     dispatcher.register('GET', '/close', close_door)
     dispatcher.register('GET', '/open', open_door)
     dispatcher.register('GET', '/keygen', get_keygen_page)
+
 
 
     # Launch a basic server
