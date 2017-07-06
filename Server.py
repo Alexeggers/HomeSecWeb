@@ -97,8 +97,8 @@ def generateSSHKey(keyName):
         os.system('ssh-keygen -t rsa -b 4096 -f /keyserver/regkey/' + keyName + ' -q -N ""')
         os.system('ssh-keygen -y -f /keyserver/regkey/' + keyName + ' > /keyserver/regkey/' + str(keyName) + '.pub')
         
-        os.system('chmod 600 /keyserver/regkey/' + keyName)
-        os.system('chmod 644 /keyserver/regkey/' + keyName + '.pub')
+        #os.system('chmod 600 /keyserver/regkey/' + keyName)
+        #os.system('chmod 644 /keyserver/regkey/' + keyName + '.pub')
         
         print "[INFO] Key Pair was generated successfully"
     except:
