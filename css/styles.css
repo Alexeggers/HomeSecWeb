@@ -104,3 +104,7 @@ a {
     transform: translate(-50%, 0);
     left: 50%;
 }
+
+.black {
+    color: black;
+}
